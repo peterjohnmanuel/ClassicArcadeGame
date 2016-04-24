@@ -18,6 +18,8 @@ Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    
+    this.x = this.x * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -47,7 +49,19 @@ Player.prototype.render = function () {
 
 Player.prototype.handleInput = function (key) {
 
-    console.log(key);
+    console.log(this.x, this.y);
+
+    if (this.x == 407)
+        console.log("cannot move right");
+
+    if (this.x == 3)
+        console.log("cannot move left");
+
+    if ((this.y - 83) == 48)
+        console.log("cannot move up");
+        
+    if (this.y == 380)
+        console.log("cannot move down");
 
     switch (key) {
         case 'up': this.y = this.y - 83;
@@ -69,7 +83,11 @@ Player.prototype.handleInput = function (key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var player = new Player();
+// var player = new Player();
+
+// var fastEnemy = new Enemy();
+
+//var enemy = []
 
 
 // This listens for key presses and sends the keys to your
