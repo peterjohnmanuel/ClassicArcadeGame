@@ -1,15 +1,24 @@
 'use strict';
 
+var min = 100;
+var max = 500;
+
+var fastEnemyXcoordinate = -300;
+var mediumEnemyXcoordinate = -150;
+var slowEnemyXcoordinate = -50;
+
+
 // Enemies our player must avoid
-var Enemy = function () {
+var Enemy = function (x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x;
-    this.y;
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -19,13 +28,30 @@ Enemy.prototype.update = function (dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     
-    this.x = this.x * dt;
+    this.x = this.x + (this.speed * dt);
+    
+    if(this.x > 510)
+        this.reset();
+    else
+        this.render();
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Enemy.prototype.reset = function(){
+ 
+    this.x = -200;
+    this.speed = getRandomArbitrrary(min, max);
+    this.render();
+
+}
+
+function getRandomArbitrrary(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -38,7 +64,7 @@ var Player = function () {
     this.y = 380;
 }
 
-Player.prototype.update = function (dt) {
+Player.prototype.update = function () {
     this.x;
     this.y;
 }
@@ -83,11 +109,16 @@ Player.prototype.handleInput = function (key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-// var player = new Player();
+ var player = new Player();
 
-// var fastEnemy = new Enemy();
+ var enemy1 = new Enemy(-50 , 214 , 100);
+ var enemy2 = new Enemy(-50 , 131 , 200);
+ var enemy3 = new Enemy(-150 , 48  , 300);
+ var enemy4 = new Enemy(-50, 214 , 100);
+ var enemy5 = new Enemy(-50, 48 , 200);
 
-//var enemy = []
+
+var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 
 
 // This listens for key presses and sends the keys to your
