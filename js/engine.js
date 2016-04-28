@@ -85,7 +85,10 @@ var Engine = (function(global) {
     
     function checkCollisions()
     {
-        
+        allEnemies.forEach(function(enemy){
+            
+            
+        })
     }
 
     /* This is called by the update function and loops through all of the

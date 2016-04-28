@@ -3,22 +3,22 @@
 var min = 100;
 var max = 500;
 
-var fastEnemyXcoordinate = -300;
-var mediumEnemyXcoordinate = -150;
-var slowEnemyXcoordinate = -50;
+var fastEnemyInitialXcoordinate = -300;
+var mediumEnemyInitialXcoordinate = -150;
+var slowEnemyInitialXcoordinate = -50;
 
 
 // Enemies our player must avoid
-var Enemy = function (x, y, speed) {
+var Enemy = function (x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // a helper we've provided to easily load images   
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = speed;
+    this.speed;  
 };
 
 // Update the enemy's position, required method for game
@@ -26,8 +26,7 @@ var Enemy = function (x, y, speed) {
 Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers.
-    
+    // all computers.    
     this.x = this.x + (this.speed * dt);
     
     if(this.x > 510)
@@ -41,14 +40,52 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.reset = function(){
- 
-    this.x = -200;
+Enemy.prototype.reset = function(){    
+    this.x = -200;   
     this.speed = getRandomArbitrrary(min, max);
     this.render();
-
 }
 
+Enemy.prototype.getPosition = function(){
+        
+}
+
+// Slow Paced Enemies Enemy subclass
+var SlowEnemy = function (x , y) {
+    this.speed = getRandomArbitrrary(50,200);
+    Enemy.call(this, x, y);
+}
+
+SlowEnemy.prototype = Object.create(Enemy.prototype);
+SlowEnemy.prototype.constructor = SlowEnemy;
+
+
+// Medium Paced Enemies Enemy subclass
+
+// Constructor for Meduim paced Enemies
+var MediumEnemy = function (x , y) {
+    
+    this.speed = getRandomArbitrrary(201,350);
+    Enemy.call(this, x, y);
+}
+
+MediumEnemy.prototype = Object.create(Enemy.prototype);
+MediumEnemy.prototype.constructor = SlowEnemy;
+
+
+// Fast Paced Enemies Enemy subclass
+
+// Constructor for Fast paced Enemies
+var FastEnemy = function (x , y , speed) {
+    this.speed = getRandomArbitrrary(351,500);
+    Enemy.call(this, x, y);
+}
+
+FastEnemy.prototype = Object.create(Enemy.prototype);
+FastEnemy.prototype.constructor = SlowEnemy;
+
+
+// Get Speed of random speed of enemy
 function getRandomArbitrrary(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -111,11 +148,11 @@ Player.prototype.handleInput = function (key) {
 
  var player = new Player();
 
- var enemy1 = new Enemy(-50 , 214 , 100);
- var enemy2 = new Enemy(-50 , 131 , 200);
- var enemy3 = new Enemy(-150 , 48  , 300);
- var enemy4 = new Enemy(-50, 214 , 100);
- var enemy5 = new Enemy(-50, 48 , 200);
+ var enemy1 = new SlowEnemy(-50 ,214);
+ var enemy2 = new SlowEnemy(-50 ,131);
+ var enemy3 = new MediumEnemy(-150 ,48);
+ var enemy4 = new MediumEnemy(-50,214);
+ var enemy5 = new FastEnemy(-50, 48);
 
 
 var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
