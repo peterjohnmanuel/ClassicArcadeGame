@@ -86,8 +86,16 @@ var Engine = (function(global) {
     function checkCollisions()
     {
         allEnemies.forEach(function(enemy){
-            
-            
+           
+           enemyPosition = enemy.getPosition();
+           playerPosition = player.getPosition();
+           if(Math.ceil(enemyPosition[0]) == Math.ceil(playerPosition[0]) && Math.ceil(playerPosition[1]) == Math.ceil(enemyPosition[1]))
+                console.log("Contact");
+            //console.log(enemyPosition[1]);
+        //    console.log("Enemy", enemy.getPosition());
+        //    console.log("Player",player.getPosition());
+           
+           
         })
     }
 

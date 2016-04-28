@@ -46,8 +46,8 @@ Enemy.prototype.reset = function(){
     this.render();
 }
 
-Enemy.prototype.getPosition = function(){
-        
+Enemy.prototype.getPosition = function(){      
+      return[this.x , this.y];  
 }
 
 // Slow Paced Enemies Enemy subclass
@@ -109,6 +109,11 @@ Player.prototype.update = function () {
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
+
+Player.prototype.getPosition = function () {
+    return[this.x , this.y];  
+}
+
 
 Player.prototype.handleInput = function (key) {
 
