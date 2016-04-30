@@ -18,7 +18,7 @@ var Enemy = function (x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed;  
+    this.speed;
 };
 
 // Update the enemy's position, required method for game
@@ -28,8 +28,8 @@ Enemy.prototype.update = function (dt) {
     // which will ensure the game runs at the same speed for
     // all computers.    
     this.x = this.x + (this.speed * dt);
-    
-    if(this.x > 510)
+
+    if (this.x > 510)
         this.reset();
     else
         this.render();
@@ -40,19 +40,19 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.reset = function(){    
-    this.x = -200;   
+Enemy.prototype.reset = function () {
+    this.x = -200;
     this.speed = getRandomArbitrrary(min, max);
     this.render();
 }
 
-Enemy.prototype.getPosition = function(){      
-      return[this.x , this.y];  
+Enemy.prototype.getPosition = function () {
+    return [this.x, this.y];
 }
 
 // Slow Paced Enemies Enemy subclass
-var SlowEnemy = function (x , y) {
-    this.speed = getRandomArbitrrary(50,200);
+var SlowEnemy = function (x, y) {
+    this.speed = getRandomArbitrrary(50, 200);
     Enemy.call(this, x, y);
 }
 
@@ -63,9 +63,9 @@ SlowEnemy.prototype.constructor = SlowEnemy;
 // Medium Paced Enemies Enemy subclass
 
 // Constructor for Meduim paced Enemies
-var MediumEnemy = function (x , y) {
-    
-    this.speed = getRandomArbitrrary(201,350);
+var MediumEnemy = function (x, y) {
+
+    this.speed = getRandomArbitrrary(201, 350);
     Enemy.call(this, x, y);
 }
 
@@ -76,8 +76,8 @@ MediumEnemy.prototype.constructor = SlowEnemy;
 // Fast Paced Enemies Enemy subclass
 
 // Constructor for Fast paced Enemies
-var FastEnemy = function (x , y , speed) {
-    this.speed = getRandomArbitrrary(351,500);
+var FastEnemy = function (x, y, speed) {
+    this.speed = getRandomArbitrrary(351, 500);
     Enemy.call(this, x, y);
 }
 
@@ -86,7 +86,7 @@ FastEnemy.prototype.constructor = SlowEnemy;
 
 
 // Get Speed of random speed of enemy
-function getRandomArbitrrary(min, max){
+function getRandomArbitrrary(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -111,25 +111,33 @@ Player.prototype.render = function () {
 }
 
 Player.prototype.getPosition = function () {
-    return[this.x , this.y];  
+    return [this.x, this.y];
+}
+
+Player.prototype.reset = function () {
+    this.x = 205;
+    this.y = 380;
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 
 Player.prototype.handleInput = function (key) {
 
-    console.log(this.x, this.y);
+    var canRender = true;
+
 
     if (this.x == 407)
-        console.log("cannot move right");
+        canRender = false;
 
     if (this.x == 3)
-        console.log("cannot move left");
+        canRender = false;
 
     if ((this.y - 83) == 48)
-        console.log("cannot move up");
-        
+        canRender = false;
+
     if (this.y == 380)
-        console.log("cannot move down");
+        canRender = false;
+
 
     switch (key) {
         case 'up': this.y = this.y - 83;
@@ -151,13 +159,13 @@ Player.prototype.handleInput = function (key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
- var player = new Player();
+var player = new Player();
 
- var enemy1 = new SlowEnemy(-50 ,214);
- var enemy2 = new SlowEnemy(-50 ,131);
- var enemy3 = new MediumEnemy(-150 ,48);
- var enemy4 = new MediumEnemy(-50,214);
- var enemy5 = new FastEnemy(-50, 48);
+var enemy1 = new SlowEnemy(-50, 214);
+var enemy2 = new SlowEnemy(-50, 131);
+var enemy3 = new MediumEnemy(-150, 48);
+var enemy4 = new MediumEnemy(-50, 214);
+var enemy5 = new FastEnemy(-50, 48);
 
 
 var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];

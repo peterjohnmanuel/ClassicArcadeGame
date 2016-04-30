@@ -89,13 +89,16 @@ var Engine = (function(global) {
            
            enemyPosition = enemy.getPosition();
            playerPosition = player.getPosition();
-           if(Math.ceil(enemyPosition[0]) == Math.ceil(playerPosition[0]) && Math.ceil(playerPosition[1]) == Math.ceil(enemyPosition[1]))
-                console.log("Contact");
-            //console.log(enemyPosition[1]);
-        //    console.log("Enemy", enemy.getPosition());
-        //    console.log("Player",player.getPosition());
            
-           
+           if(
+               
+               Math.ceil(enemyPosition[0]) < Math.ceil(playerPosition[0] + 41) &&                
+               Math.ceil(enemyPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+               Math.ceil(enemyPosition[1]) < Math.ceil(playerPosition[1] + 41) &&
+               Math.ceil(enemyPosition[1] + 41) > Math.ceil(playerPosition[1]) 
+               
+           )
+           player.reset();
         })
     }
 
