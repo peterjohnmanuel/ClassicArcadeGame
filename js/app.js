@@ -94,7 +94,7 @@ function getRandomArbitrrary(min, max) {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-
+// Player constructor
 var Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 205;
@@ -120,40 +120,64 @@ Player.prototype.reset = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-
 Player.prototype.handleInput = function (key) {
 
-    var canRender = true;
+    var up = true;
+    var down = true;
+    var left = true;
+    var right = true;
 
+    if (this.x == 407) {
+        right = false;
+        console.log("x :", this.x);
+    }
 
-    if (this.x == 407)
-        canRender = false;
+    if (this.x == 3) {
+        left = false;
+    }
+    
+    console.log(this.y);
 
-    if (this.x == 3)
-        canRender = false;
+    // if ((this.y - 83) == 48) {
+    //     up = false;
+    // }
 
-    if ((this.y - 83) == 48)
-        canRender = false;
+    if ((this.y + 83) > 380) {
+        down = false;
+    }
 
-    if (this.y == 380)
-        canRender = false;
-
-
+    //if (canRender) {
     switch (key) {
-        case 'up': this.y = this.y - 83;
-            this.render();
+        case 'up':
+            if (up) {
+                this.y = this.y - 83;
+                this.render();
+            }
+
             break;
-        case 'down': this.y = this.y + 83;
-            this.render();
+        case 'down':
+            if (down) {
+                this.y = this.y + 83;
+                this.render();
+            }
             break;
-        case 'left': this.x = this.x - 101;
-            this.render();
+        case 'left':
+            if (left) {
+                this.x = this.x - 101;
+                this.render();
+            }
             break;
-        case 'right': this.x = this.x + 101;
-            this.render();
+        case 'right':
+            if (right) {
+                this.x = this.x + 101;
+                this.render();
+            }
             break;
     }
+    //}
 }
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
