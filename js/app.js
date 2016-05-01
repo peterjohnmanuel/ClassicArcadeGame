@@ -107,7 +107,13 @@ Player.prototype.update = function () {
 }
 
 Player.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+    if (this.y < 48) {
+        this.reset()
+    }
+    else {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 }
 
 Player.prototype.getPosition = function () {
@@ -135,25 +141,16 @@ Player.prototype.handleInput = function (key) {
     if (this.x == 3) {
         left = false;
     }
-    
-    console.log(this.y);
 
-    // if ((this.y - 83) == 48) {
-    //     up = false;
-    // }
+    console.log(this.y);
 
     if ((this.y + 83) > 380) {
         down = false;
     }
 
-    //if (canRender) {
     switch (key) {
         case 'up':
-            if (up) {
-                this.y = this.y - 83;
                 this.render();
-            }
-
             break;
         case 'down':
             if (down) {
@@ -174,7 +171,6 @@ Player.prototype.handleInput = function (key) {
             }
             break;
     }
-    //}
 }
 
 
