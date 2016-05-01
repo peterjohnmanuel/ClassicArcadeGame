@@ -127,29 +127,14 @@ Player.prototype.reset = function () {
 }
 
 Player.prototype.handleInput = function (key) {
-
-    var up = true;
-    var down = true;
-    var left = true;
-    var right = true;
-
-    if (this.x == 407) {
-        right = false;
-        console.log("x :", this.x);
-    }
-
-    if (this.x == 3) {
-        left = false;
-    }
-
-    console.log(this.y);
-
-    if ((this.y + 83) > 380) {
-        down = false;
-    }
+    
+    var right = (this.x == 407) ? false : true;
+    var left = (this.x == 3) ? false : true;
+    var down = ((this.y + 83) > 380) ? false : true;
 
     switch (key) {
         case 'up':
+                this.y = this.y - 83;
                 this.render();
             break;
         case 'down':
