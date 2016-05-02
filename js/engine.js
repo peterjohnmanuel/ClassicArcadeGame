@@ -14,7 +14,7 @@
  * a little simpler to work with.
  */
 
-var Engine = (function(global) {
+var Engine = (function (global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -82,23 +82,35 @@ var Engine = (function(global) {
         updateEntities(dt);
         checkCollisions();
     }
-    
-    function checkCollisions()
-    {
-        allEnemies.forEach(function(enemy){
-           
-           enemyPosition = enemy.getPosition();
-           playerPosition = player.getPosition();
-           
-           if(
-               
-               Math.ceil(enemyPosition[0]) < Math.ceil(playerPosition[0] + 41) &&                
-               Math.ceil(enemyPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
-               Math.ceil(enemyPosition[1]) < Math.ceil(playerPosition[1] + 41) &&
-               Math.ceil(enemyPosition[1] + 41) > Math.ceil(playerPosition[1]) 
-               
-           )
-           player.reset();
+
+    function checkCollisions() {
+        allEnemies.forEach(function (enemy) {
+
+            enemyPosition = enemy.getPosition();
+            playerPosition = player.getPosition();
+            lifePosition = life.getPosition();
+
+            if (
+                Math.ceil(enemyPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+                Math.ceil(enemyPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+                Math.ceil(enemyPosition[1]) < Math.ceil(playerPosition[1] + 41) &&
+                Math.ceil(enemyPosition[1] + 41) > Math.ceil(playerPosition[1])
+            ) {
+                player.reset();
+                document.getElementById("Life").innerHTML = player.getLife();
+            }
+
+            if (
+                Math.ceil(lifePosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+                Math.ceil(lifePosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+                Math.ceil(lifePosition[1]) < Math.ceil(playerPosition[1] + 41) &&
+                Math.ceil(lifePosition[1] + 41) > Math.ceil(playerPosition[1])
+            ) {
+                life.hideHeart();
+                player.addLife();
+                document.getElementById("Life").innerHTML = player.getLife();
+            }
+
         })
     }
 
@@ -110,10 +122,10 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-         allEnemies.forEach(function(enemy) {
-             enemy.update(dt);
-         });
-         player.update();
+        allEnemies.forEach(function (enemy) {
+            enemy.update(dt);
+        });
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -127,13 +139,13 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
-            ],
+            'images/water-block.png',   // Top row is water
+            'images/stone-block.png',   // Row 1 of 3 of stone
+            'images/stone-block.png',   // Row 2 of 3 of stone
+            'images/stone-block.png',   // Row 3 of 3 of stone
+            'images/grass-block.png',   // Row 1 of 2 of grass
+            'images/grass-block.png'    // Row 2 of 2 of grass
+        ],
             numRows = 6,
             numCols = 5,
             row, col;
@@ -166,11 +178,12 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-         allEnemies.forEach(function(enemy) {
-             enemy.render();
-         });
+        allEnemies.forEach(function (enemy) {
+            enemy.render();
+        });
 
         player.render();
+        life.showHeart();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -178,6 +191,8 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
+        document.getElementById("Life").innerHTML = player.getLife();
+
         // noop
     }
 
@@ -190,7 +205,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 

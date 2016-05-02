@@ -18,7 +18,6 @@ var Enemy = function (x, y) {
     this.x = x;
     this.y = y;
     this.speed;
-    this.life = 3; 
 };
 
 // Update the enemy's position, required method for game

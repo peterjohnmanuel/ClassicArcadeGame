@@ -9,6 +9,7 @@ var Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 205;
     this.y = 380;
+    this.life = 3; 
 }
 
 Player.prototype.update = function () {
@@ -30,11 +31,31 @@ Player.prototype.getPosition = function () {
     return [this.x, this.y];
 }
 
+
+// Reset player to starting position and removes a life.
 Player.prototype.reset = function () {
     this.x = 205;
     this.y = 380;
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    this.removeLife();
 }
+
+// Remove a life from a player
+Player.prototype.removeLife = function () {
+    this.life = this.life - 1;
+}
+
+// Add Life to player
+Player.prototype.addLife = function () {
+    this.life = this.life + 1;
+}
+
+// Add Life to player
+Player.prototype.getLife = function () {
+    return this.life;
+}
+
+
 
 Player.prototype.handleInput = function (key) {
     
