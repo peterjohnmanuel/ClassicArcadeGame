@@ -84,11 +84,14 @@ var Engine = (function (global) {
     }
 
     function checkCollisions() {
+        
+        playerPosition = player.getPosition();
+        lifePosition = life.getPosition();
+        gemPosition = gem.getPosition();
+        
         allEnemies.forEach(function (enemy) {
 
             enemyPosition = enemy.getPosition();
-            playerPosition = player.getPosition();
-            lifePosition = life.getPosition();
 
             if (
                 Math.ceil(enemyPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
@@ -99,19 +102,33 @@ var Engine = (function (global) {
                 player.reset();
                 document.getElementById("Life").innerHTML = player.getLife();
             }
-
-            if (
-                Math.ceil(lifePosition[0]) < Math.ceil(playerPosition[0] + 41) &&
-                Math.ceil(lifePosition[0] + 41) > Math.ceil(playerPosition[0]) &&
-                Math.ceil(lifePosition[1]) < Math.ceil(playerPosition[1] + 41) &&
-                Math.ceil(lifePosition[1] + 41) > Math.ceil(playerPosition[1])
-            ) {
-                life.hideHeart();
-                player.addLife();
-                document.getElementById("Life").innerHTML = player.getLife();
-            }
-
-        })
+        });
+               
+        if (
+            Math.ceil(lifePosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+            Math.ceil(lifePosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+            Math.ceil(lifePosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
+            Math.ceil(lifePosition[1] + 41) > Math.ceil(playerPosition[1])
+        ) {            
+            life.hideHeart();
+            player.addLife();
+            document.getElementById("Life").innerHTML = player.getLife();
+        }
+        
+        //TODO : Add score here
+        if (
+            Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+            Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+            Math.ceil(gemPosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
+            Math.ceil(gemPosition[1] + 41) > Math.ceil(playerPosition[1])
+        ) {
+                                                
+            player.updateScore(gem.getGemScore());
+            gem.hideGem();
+            document.getElementById("Score").innerHTML = player.getScore();           
+        }        
+        
+        
     }
 
     /* This is called by the update function and loops through all of the
@@ -184,6 +201,7 @@ var Engine = (function (global) {
 
         player.render();
         life.showHeart();
+        gem.showGem();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -192,6 +210,7 @@ var Engine = (function (global) {
      */
     function reset() {
         document.getElementById("Life").innerHTML = player.getLife();
+        document.getElementById("Score").innerHTML = player.getScore();
 
         // noop
     }
@@ -206,7 +225,10 @@ var Engine = (function (global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/Heart.png'
+        'images/Heart.png',
+        'images/Gem Blue.png',
+        'images/Gem Green.png',
+        'images/Gem Orange.png',
     ]);
     Resources.onReady(init);
 

@@ -1,24 +1,31 @@
 'use strict';
 
-var Life = function () {    
+var Life = function () {
     this.sprite = 'images/Heart.png';
-    this.x = 101;
-    this.y = 160;
+    this.x = getRandomXCoordinate();
+    this.y = getRandomYCoordinate();  
+    this.heartShown = false;
+    this.getNewHeartPosition();  
 }
 
-Life.prototype.getPosition = function () {    
+Life.prototype.getPosition = function () {
     return [this.x, this.y];
-} 
+}
 
-Life.prototype.showHeart = function(){    
+Life.prototype.showHeart = function () {
     this.render();
 }
 
-Life.prototype.hideHeart = function(){
-    
+Life.prototype.getNewHeartPosition = function () {
+    this.x = getRandomXCoordinate();
+    this.y = getRandomYCoordinate();    
+}
+
+Life.prototype.hideHeart = function () {
     this.x = 600;
-    this.y = 600;    
+    this.y = 600;
     this.render();
+    this.heartShown = false;
 }
 
 Life.prototype.render = function () {

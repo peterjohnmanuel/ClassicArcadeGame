@@ -10,6 +10,7 @@ var Player = function () {
     this.x = 205;
     this.y = 380;
     this.life = 3; 
+    this.score = 0;
 }
 
 Player.prototype.update = function () {
@@ -29,6 +30,17 @@ Player.prototype.render = function () {
 
 Player.prototype.getPosition = function () {
     return [this.x, this.y];
+}
+
+Player.prototype.updateScore = function (gemScore) {
+    
+    console.log(gemScore);
+    
+    this.score = this.score + gemScore;
+}
+
+Player.prototype.getScore = function () {
+    return this.score;
 }
 
 
@@ -54,8 +66,6 @@ Player.prototype.addLife = function () {
 Player.prototype.getLife = function () {
     return this.life;
 }
-
-
 
 Player.prototype.handleInput = function (key) {
     
