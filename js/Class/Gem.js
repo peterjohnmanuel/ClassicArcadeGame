@@ -47,11 +47,14 @@ Gem.prototype.getGemScore = function () {
 
 
 // Gem Low score sub class constructor
-var GemSlow = function () {
+var GemLow = function () {
     this.sprite = 'images/Gem Blue.png';
     this.score = 10;  
     Gem.call(this);
 }
+
+GemLow.prototype = Object.create(Gem.prototype);
+GemLow.prototype.constructor = GemLow;
 
 // Gem meduim score sub class constructor
 var GemMeduim = function () {

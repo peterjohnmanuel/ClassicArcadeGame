@@ -10,11 +10,11 @@ var player = new Player();
 var life = new Life();
 
 // Gems
-var gem = new GemHigh();
-var gem2 = new GemHigh();
+var gem1 = new GemLow();
+var gem2 = new GemMeduim();
 var gem3 = new GemHigh();
-var gem4 = new GemHigh();
-var gem5 = new GemHigh();
+
+var allGems = [gem1, gem2, gem3];
 
 // Enemies
 var enemy1 = new SlowEnemy(-50, 214);
@@ -23,10 +23,7 @@ var enemy3 = new MediumEnemy(-150, 48);
 var enemy4 = new MediumEnemy(-50, 214);
 var enemy5 = new FastEnemy(-50, 48);
 
-
 var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
-//var allGems = [enemy1, enemy2, enemy3, enemy4, enemy5];
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

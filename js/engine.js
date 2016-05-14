@@ -84,11 +84,11 @@ var Engine = (function (global) {
     }
 
     function checkCollisions() {
-        
+
         playerPosition = player.getPosition();
         lifePosition = life.getPosition();
-        gemPosition = gem.getPosition();
         
+
         allEnemies.forEach(function (enemy) {
 
             enemyPosition = enemy.getPosition();
@@ -103,32 +103,48 @@ var Engine = (function (global) {
                 document.getElementById("Life").innerHTML = player.getLife();
             }
         });
-               
+
         if (
             Math.ceil(lifePosition[0]) < Math.ceil(playerPosition[0] + 41) &&
             Math.ceil(lifePosition[0] + 41) > Math.ceil(playerPosition[0]) &&
             Math.ceil(lifePosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
             Math.ceil(lifePosition[1] + 41) > Math.ceil(playerPosition[1])
-        ) {            
+        ) {
             life.hideHeart();
             player.addLife();
             document.getElementById("Life").innerHTML = player.getLife();
         }
-        
-        //TODO : Add score here
-        if (
-            Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
-            Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
-            Math.ceil(gemPosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
-            Math.ceil(gemPosition[1] + 41) > Math.ceil(playerPosition[1])
-        ) {
-                                                
-            player.updateScore(gem.getGemScore());
-            gem.hideGem();
-            document.getElementById("Score").innerHTML = player.getScore();           
-        }        
-        
-        
+
+        allGems.forEach(function (gem) {
+            
+            gemPosition = gem.getPosition();
+            
+            if (
+                Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+                Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+                Math.ceil(gemPosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
+                Math.ceil(gemPosition[1] + 41) > Math.ceil(playerPosition[1])
+            ) {
+
+                player.updateScore(gem.getGemScore());
+                gem.hideGem();
+                document.getElementById("Score").innerHTML = player.getScore();
+            }
+        });
+
+        // if (
+        //     Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
+        //     Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
+        //     Math.ceil(gemPosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
+        //     Math.ceil(gemPosition[1] + 41) > Math.ceil(playerPosition[1])
+        // ) {
+
+        //     player.updateScore(gem.getGemScore());
+        //     gem.hideGem();
+        //     document.getElementById("Score").innerHTML = player.getScore();
+        // }
+
+
     }
 
     /* This is called by the update function and loops through all of the
@@ -201,7 +217,10 @@ var Engine = (function (global) {
 
         player.render();
         life.showHeart();
-        gem.showGem();
+        
+        allGems.forEach(function (gem) {
+            gem.showGem();
+        })
     }
 
     /* This function does nothing but it could have been a good place to
