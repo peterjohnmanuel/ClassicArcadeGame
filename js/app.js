@@ -10,8 +10,11 @@ var player = new Player();
 var life = new Life();
 
 // Gems
-
-var gem = new Gem();
+var gem = new GemHigh();
+var gem2 = new GemHigh();
+var gem3 = new GemHigh();
+var gem4 = new GemHigh();
+var gem5 = new GemHigh();
 
 // Enemies
 var enemy1 = new SlowEnemy(-50, 214);
@@ -34,10 +37,5 @@ document.addEventListener('keyup', function (e) {
         39: 'right',
         40: 'down'
     };
-    
-    
-    
     player.handleInput(allowedKeys[e.keyCode]);
-    
-    console.log(player.getPosition());
 });

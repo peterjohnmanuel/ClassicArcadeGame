@@ -3,12 +3,10 @@
 
 // Gem base super Constructor
 var Gem = function () {    
-    this.sprite = 'images/Gem Blue.png';
+    this.sprite;//= 'images/Gem Blue.png';
     this.x = getRandomXGemCoordinate();
     this.y = getRandomYCoordinate() ;
-    this.score = 10;    
     var gemShown = false;
-    
 }
 
 // Get gems position
@@ -23,9 +21,6 @@ Gem.prototype.showGem = function(){
 
 // Gets the gems new position
 Gem.prototype.getNewGemPosition = function(){
-    // this.x = 225;
-    // this.y = 160;
-    
     this.x = getRandomXCoordinate();
     this.y = getRandomYCoordinate();  
     
@@ -51,23 +46,28 @@ Gem.prototype.getGemScore = function () {
 }
 
 
+// Gem Low score sub class constructor
+var GemSlow = function () {
+    this.sprite = 'images/Gem Blue.png';
+    this.score = 10;  
+    Gem.call(this);
+}
+
 // Gem meduim score sub class constructor
 var GemMeduim = function () {
     this.sprite = 'images/Gem Green.png';
-    this.gemScore = 20;
+    this.score = 20;    
     Gem.call(this);
 }
 
 GemMeduim.prototype = Object.create(Gem.prototype);
 GemMeduim.prototype.constructor = GemMeduim;
 
-
-
 // Gem High score sub class constructor
 var GemHigh = function (x, y) {
 
     this.sprite = 'images/Gem Orange.png';    
-    this.gemScore = 30;
+    this.score = 30;
     Gem.call(this);
 }
 

@@ -69,7 +69,7 @@ var MediumEnemy = function (x, y) {
 }
 
 MediumEnemy.prototype = Object.create(Enemy.prototype);
-MediumEnemy.prototype.constructor = SlowEnemy;
+MediumEnemy.prototype.constructor = MediumEnemy;
 
 
 // Fast Paced Enemies Enemy subclass
@@ -81,4 +81,4 @@ var FastEnemy = function (x, y, speed) {
 }
 
 FastEnemy.prototype = Object.create(Enemy.prototype);
-FastEnemy.prototype.constructor = SlowEnemy;
+FastEnemy.prototype.constructor = FastEnemy;
