@@ -27,8 +27,8 @@ Gem.prototype.getNewGemPosition = function () {
 
 // Hides the gem
 Gem.prototype.hideGem = function () {
-    this.x = 700;
-    this.y = 700;
+    this.x = 900;
+    this.y = 900;
     this.render();
 
     setTimeout(this.getNewGemPosition.bind(this), 5000);

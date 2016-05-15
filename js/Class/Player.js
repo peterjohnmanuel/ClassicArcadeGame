@@ -34,6 +34,7 @@ Player.prototype.getPosition = function () {
     return [this.x, this.y];
 }
 
+// Get's player score and update player avatar based on level
 Player.prototype.updateScore = function (gemScore) {
     this.score = this.score + gemScore;
 
@@ -95,7 +96,7 @@ Player.prototype.getLife = function () {
 Player.prototype.dead = function () {
     this.x = 700;
     this.y = 700;
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    this.render();    
 }
 
 Player.prototype.handleInput = function (key) {
