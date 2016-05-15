@@ -87,7 +87,7 @@ var Engine = (function (global) {
 
         playerPosition = player.getPosition();
         lifePosition = life.getPosition();
-        
+
 
         allEnemies.forEach(function (enemy) {
 
@@ -116,9 +116,9 @@ var Engine = (function (global) {
         }
 
         allGems.forEach(function (gem) {
-            
+
             gemPosition = gem.getPosition();
-            
+
             if (
                 Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
                 Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
@@ -131,20 +131,6 @@ var Engine = (function (global) {
                 document.getElementById("Score").innerHTML = player.getScore();
             }
         });
-
-        // if (
-        //     Math.ceil(gemPosition[0]) < Math.ceil(playerPosition[0] + 41) &&
-        //     Math.ceil(gemPosition[0] + 41) > Math.ceil(playerPosition[0]) &&
-        //     Math.ceil(gemPosition[1]) <= Math.ceil(playerPosition[1] + 41) &&
-        //     Math.ceil(gemPosition[1] + 41) > Math.ceil(playerPosition[1])
-        // ) {
-
-        //     player.updateScore(gem.getGemScore());
-        //     gem.hideGem();
-        //     document.getElementById("Score").innerHTML = player.getScore();
-        // }
-
-
     }
 
     /* This is called by the update function and loops through all of the
@@ -215,12 +201,13 @@ var Engine = (function (global) {
             enemy.render();
         });
 
-        player.render();
-        life.showHeart();
-        
         allGems.forEach(function (gem) {
             gem.showGem();
-        })
+        });
+
+        player.render();
+        life.showHeart();
+
     }
 
     /* This function does nothing but it could have been a good place to
