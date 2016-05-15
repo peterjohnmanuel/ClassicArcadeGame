@@ -100,7 +100,7 @@ var Engine = (function (global) {
                 Math.ceil(enemyPosition[1] + 41) > Math.ceil(playerPosition[1])
             ) {
                 player.reset();
-                document.getElementById("Life").innerHTML = player.getLife();
+                document.getElementById("Life").innerHTML = "Life : " + player.getLife();
             }
         });
 
@@ -112,7 +112,7 @@ var Engine = (function (global) {
         ) {
             life.hideHeart();
             player.addLife();
-            document.getElementById("Life").innerHTML = player.getLife();
+            document.getElementById("Life").innerHTML = "Life : " + player.getLife();
         }
 
         allGems.forEach(function (gem) {
@@ -128,7 +128,7 @@ var Engine = (function (global) {
 
                 player.updateScore(gem.getGemScore());
                 gem.hideGem();
-                document.getElementById("Score").innerHTML = player.getScore();
+                document.getElementById("Score").innerHTML =  "Score: " + player.getScore();
             }
         });
     }
@@ -215,8 +215,8 @@ var Engine = (function (global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        document.getElementById("Life").innerHTML = player.getLife();
-        document.getElementById("Score").innerHTML = player.getScore();
+        document.getElementById("Life").innerHTML = "Life : " + player.getLife();
+        document.getElementById("Score").innerHTML = "Score: " + player.getScore();
 
         // noop
     }
