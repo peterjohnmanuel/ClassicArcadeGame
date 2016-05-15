@@ -12,6 +12,7 @@ var Player = function () {
     this.life = 3;
     this.score = 0;
     this.level = 0;
+    this.playerInputDisabled = false;
 }
 
 Player.prototype.update = function () {
@@ -75,6 +76,9 @@ Player.prototype.reset = function () {
 // Remove a life from a player
 Player.prototype.removeLife = function () {
     this.life = this.life - 1;
+
+    if (this.life < 0)
+        this.playerInputDisabled = true;
 }
 
 // Add Life to player
@@ -87,34 +91,43 @@ Player.prototype.getLife = function () {
     return this.life;
 }
 
+// Player dead
+Player.prototype.dead = function () {
+    this.x = 700;
+    this.y = 700;
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 Player.prototype.handleInput = function (key) {
 
-    var right = (this.x == 407) ? false : true;
-    var left = (this.x == 3) ? false : true;
-    var down = ((this.y + 83) > 380) ? false : true;
+    if (!this.playerInputDisabled) {
+        var right = (this.x == 407) ? false : true;
+        var left = (this.x == 3) ? false : true;
+        var down = ((this.y + 83) > 380) ? false : true;
 
-    switch (key) {
-        case 'up':
-            this.y = this.y - 83;
-            this.render();
-            break;
-        case 'down':
-            if (down) {
-                this.y = this.y + 83;
+        switch (key) {
+            case 'up':
+                this.y = this.y - 83;
                 this.render();
-            }
-            break;
-        case 'left':
-            if (left) {
-                this.x = this.x - 101;
-                this.render();
-            }
-            break;
-        case 'right':
-            if (right) {
-                this.x = this.x + 101;
-                this.render();
-            }
-            break;
+                break;
+            case 'down':
+                if (down) {
+                    this.y = this.y + 83;
+                    this.render();
+                }
+                break;
+            case 'left':
+                if (left) {
+                    this.x = this.x - 101;
+                    this.render();
+                }
+                break;
+            case 'right':
+                if (right) {
+                    this.x = this.x + 101;
+                    this.render();
+                }
+                break;
+        }
     }
 }

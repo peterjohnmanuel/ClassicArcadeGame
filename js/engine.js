@@ -99,8 +99,16 @@ var Engine = (function (global) {
                 Math.ceil(enemyPosition[1]) < Math.ceil(playerPosition[1] + 41) &&
                 Math.ceil(enemyPosition[1] + 41) > Math.ceil(playerPosition[1])
             ) {
-                player.reset();
-                document.getElementById("Life").innerHTML = "Life : " + player.getLife();
+
+                if (player.getLife() == 0) {
+                    document.getElementById("GameStatus").innerHTML = "Game Over";
+                    player.dead();
+                }
+                else {
+                    player.reset();
+                    document.getElementById("Life").innerHTML = "Life : " + player.getLife();
+                }
+
             }
         });
 
