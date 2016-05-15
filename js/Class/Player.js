@@ -9,8 +9,9 @@ var Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 205;
     this.y = 380;
-    this.life = 3; 
+    this.life = 3;
     this.score = 0;
+    this.level = 0;
 }
 
 Player.prototype.update = function () {
@@ -33,14 +34,33 @@ Player.prototype.getPosition = function () {
 }
 
 Player.prototype.updateScore = function (gemScore) {
-    
-    console.log(gemScore);
-    
     this.score = this.score + gemScore;
+
+    switch (true) {
+        case this.score < 500: this.sprite = 'images/char-boy.png';
+            this.level = 1;
+            break;
+        case this.score < 1000: this.sprite = 'images/char-cat-girl.png';
+            this.level = 2;
+            break;
+        case this.score < 1500: this.sprite = 'images/char-horn-girl.png';
+            this.level = 3;
+            break;
+        case this.score < 2000: this.sprite = 'images/char-pink-girl.png';
+            this.level = 4;
+            break;
+        case this.score < 2500: this.sprite = 'images/char-princess-girl.png';
+            this.level = 5;
+            break;
+    }
 }
 
 Player.prototype.getScore = function () {
     return this.score;
+}
+
+Player.prototype.getLevel = function () {
+    return this.level;
 }
 
 
@@ -68,15 +88,15 @@ Player.prototype.getLife = function () {
 }
 
 Player.prototype.handleInput = function (key) {
-    
+
     var right = (this.x == 407) ? false : true;
     var left = (this.x == 3) ? false : true;
     var down = ((this.y + 83) > 380) ? false : true;
 
     switch (key) {
         case 'up':
-                this.y = this.y - 83;
-                this.render();
+            this.y = this.y - 83;
+            this.render();
             break;
         case 'down':
             if (down) {

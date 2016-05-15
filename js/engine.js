@@ -128,7 +128,8 @@ var Engine = (function (global) {
 
                 player.updateScore(gem.getGemScore());
                 gem.hideGem();
-                document.getElementById("Score").innerHTML =  "Score: " + player.getScore();
+                document.getElementById("Score").innerHTML = "Score: " + player.getScore();
+                document.getElementById("Level").innerHTML = "Level: " + player.getLevel();
             }
         });
     }
@@ -207,7 +208,6 @@ var Engine = (function (global) {
 
         player.render();
         life.showHeart();
-
     }
 
     /* This function does nothing but it could have been a good place to
@@ -217,8 +217,7 @@ var Engine = (function (global) {
     function reset() {
         document.getElementById("Life").innerHTML = "Life : " + player.getLife();
         document.getElementById("Score").innerHTML = "Score: " + player.getScore();
-
-        // noop
+        document.getElementById("Level").innerHTML = "Level: " + player.getLevel();
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -235,6 +234,11 @@ var Engine = (function (global) {
         'images/Gem Blue.png',
         'images/Gem Green.png',
         'images/Gem Orange.png',
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
 
